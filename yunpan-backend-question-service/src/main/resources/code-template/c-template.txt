@@ -1,0 +1,20 @@
+#include <stdio.h>
+// 输入支持两种方式，输出统一使用printf打印,如需类型转换请自行处理
+// ---------- 方式1：读取命令行args ----------
+// int a = atoi(argv[1]);
+// int b = atoi(argv[2]);
+// ---------- 方式2：读取标准输入stdin ----------
+// char buf[128];    int a, b;
+// fgets(buf, sizeof(buf), stdin);
+// sscanf(buf, "%d", &a);
+// fgets(buf, sizeof(buf), stdin);
+// sscanf(buf, "%d", &b);
+
+// int res = a + b;
+// printf("%d\n", res);
+// ⚠️ 二选一，不要混用两套读取逻辑，避免阻塞。
+int main(int argc, char *argv[]) {
+
+
+    return 0;
+}

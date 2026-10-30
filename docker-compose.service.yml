@@ -1,0 +1,54 @@
+version: '3'
+services:
+  yunpan-backend-gateway:
+    container_name: yunpan-backend-gateway
+    build:
+      context: ./yunpan-backend-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8101:8101"
+    networks:
+      - mynetwork
+
+  yunpan-backend-user-service:
+    container_name: yunpan-backend-user-service
+    build:
+      context: ./yunpan-backend-user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8102:8102"
+    networks:
+      - mynetwork
+    depends_on:
+      - yunpan-backend-gateway
+
+  yunpan-backend-question-service:
+    container_name: yunpan-backend-question-service
+    build:
+      context: ./yunpan-backend-question-service
+      dockerfile: Dockerfile
+    ports:
+      - "8103:8103"
+    networks:
+      - mynetwork
+    depends_on:
+      - yunpan-backend-user-service
+      - yunpan-backend-gateway
+
+  yunpan-backend-judge-service:
+    container_name: yunpan-backend-judge-service
+    build:
+      context: ./yunpan-backend-judge-service
+      dockerfile: Dockerfile
+    ports:
+      - "8104:8104"
+    networks:
+      - mynetwork
+    depends_on:
+      - yunpan-backend-user-service
+      - yunpan-backend-question-service
+      - yunpan-backend-gateway
+
+# 网络，不定义的话就是默认网络
+networks:
+  mynetwork:

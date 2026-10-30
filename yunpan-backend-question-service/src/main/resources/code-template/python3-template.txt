@@ -1,0 +1,15 @@
+import sys
+# 输入支持两种方式，输出统一使用print打印,如需类型转换请自行处理
+# ---------- 方式1：读取命令行args ----------
+# a = int(sys.argv[1])
+# b = int(sys.argv[2])
+# ---------- 方式2：读取标准输入stdin ----------
+# a = int(sys.stdin.readline())
+# b = int(sys.stdin.readline())
+
+# print(a + b)
+# ⚠️ 二选一，不要混用两套读取逻辑，避免阻塞。
+def main():
+
+if __name__ == "__main__":
+    main()

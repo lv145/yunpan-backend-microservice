@@ -1,0 +1,18 @@
+import java.util.Scanner;
+// 输入支持两种方式，输出统一使用System.out打印,如需类型转换请自行处理
+// ---------- 方式1：读取命令行args ----------
+// int a = Integer.parseInt(args[0]);
+// int b = Integer.parseInt(args[1]);
+// ---------- 方式2：读取标准输入stdin ----------
+// Scanner sc = new Scanner(System.in);
+// int a = sc.nextInt();
+// int b = sc.nextInt();
+
+// System.out.println(a + b);
+// ⚠️ 二选一，不要混用两套读取逻辑，避免阻塞。
+public class ${CLASS_NAME} {
+    public static void main(String[] args) {
+
+
+    }
+}

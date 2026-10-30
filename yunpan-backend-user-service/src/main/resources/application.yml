@@ -1,0 +1,64 @@
+# Yunpan user service configuration
+# @author lgg
+# @from Yunpan project
+spring:
+  application:
+    name: yunpan-backend-user-service
+  # Active profile
+  profiles:
+    active: dev
+  # Swagger3 configuration
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # Session configuration
+  session:
+    store-type: redis
+    # 30 days
+    timeout: 2592000
+  # Database configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.159.110:3306/yunpan
+    username: root
+    password: 123
+  # Redis configuration
+  redis:
+    database: 1
+    host: 192.168.159.110
+    port: 6379
+    timeout: 5000
+    username: default
+    password: 123
+  servlet:
+    multipart:
+      # Maximum upload size
+      max-file-size: 10MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.159.110:8848
+server:
+  address: 0.0.0.0
+  port: 8102
+  servlet:
+    context-path: /api/user
+    # Cookie lifetime: 30 days
+    session:
+      cookie:
+        max-age: 2592000
+        path: /api
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # Logical delete field
+      logic-delete-value: 1 # Logical delete value
+      logic-not-delete-value: 0 # Logical not-delete value
+# Code sandbox configuration
+codesandbox:
+  type: remote
+knife4j:
+  enable: true
