@@ -12,26 +12,31 @@ import com.lgg.yunpanbackendcommon.exception.ThrowUtils;
 import com.lgg.yunpanbackendjudgeservice.judge.codesandbox.CodeSandbox;
 import com.lgg.yunpanbackendmodel.model.codesandbox.ExecuteCodeRequest;
 import com.lgg.yunpanbackendmodel.model.codesandbox.ExecuteCodeResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
 /**
  * 远程代码沙箱（实际调用接口的沙箱）
+ * @author Dragon
  */
+@Component
 public class RemoteCodeSandbox implements CodeSandbox {
-
-    // 定义鉴权请求头和密钥
-    private static final String AUTH_REQUEST_HEADER = "X-Auth-Secret";
-
-    private static final String AUTH_REQUEST_SECRET = "lgg";
+    @Value("${codesandbox.remote-auth-request-header}")
+    private String authHeader;
+    @Value("${codesandbox.remote-auth-request-secret}")
+    private String authSecret;
+    @Value("${codesandbox.remote-host}")
+    private String remoteHost;
 
     @Override
     public ExecuteCodeResponse executeCode(ExecuteCodeRequest executeCodeRequest){
-        String url = "http://192.168.159.110:8090/executeCode";
+        String url = "http://" + remoteHost + "/executeCode";
         String json = JSONUtil.toJsonStr(executeCodeRequest);
         HttpRequest request = HttpUtil.createPost(url)
-                .header(AUTH_REQUEST_HEADER, AUTH_REQUEST_SECRET)
+                .header(authHeader, authSecret)
                 .body(json)
                 .timeout(20000);
         HttpResponse response = request.execute();

@@ -1,39 +1,25 @@
 # 生产环境配置文件
 # @author lgg
 # @from 云盘在线判题平台
+nacos:
+  server-addr: 118.31.112.155:18848
+  username: nacos
+  password: Lggggg
+
+server:
+  port: 8101
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: nacos:8848
-    gateway:
-      routes:
-        - id: yunpan-backend-user-service
-          uri: lb://yunpan-backend-user-service
-          predicates:
-            - Path=/api/user/**
-        - id: yunpan-backend-question-service
-          uri: lb://yunpan-backend-question-service
-          predicates:
-            - Path=/api/question/**
-        - id: yunpan-backend-judge-service
-          uri: lb://yunpan-backend-judge-service
-          predicates:
-            - Path=/api/judge/**
   application:
     name: yunpan-backend-gateway
   main:
     web-application-type: reactive
-server:
-  port: 8101
-knife4j:
-  gateway:
-    # ① 第一个配置，开启gateway聚合组件
-    enabled: true
-    # ② 第二行配置，设置聚合模式采用discover服务发现的模式
-    strategy: discover
-    discover:
-      # ③ 第三行配置，开启discover模式
-      enabled: true
-      # ④ 第四行配置，聚合子服务全部为Swagger2规范的文档
-      version: swagger2
+#    由于新版nacos要求我们在spring config import下配置新的nacos规则，我们仅需按照以下配置即可，按照nacos之前的的版本格式p r e f i x − {prefix}-prefix−{spring.profiles.active}.${file-extension}
+  config:
+    import:
+    - nacos:${spring.application.name}-${spring.profiles.active}.yaml
+  cloud:
+    nacos:
+      server-addr: 118.31.112.155:18848
+      username: nacos
+      password: Lggggg
+

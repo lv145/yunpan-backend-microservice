@@ -25,6 +25,7 @@ public class InitRabbitMqBean {
 
     @PostConstruct
     public void init() {
+        log.info("RabbitMQ连接参数：host={}, username={}", host, username);
         try {
             ConnectionFactory factory = new ConnectionFactory();
             factory.setHost(host);
